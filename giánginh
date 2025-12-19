@@ -4,70 +4,73 @@
 <meta charset="UTF-8">
 <title>Noel 🎄</title>
 <style>
-    body{
-        margin:0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9aa2, #ffb7b2);
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        color:#fff;
-        text-align:center;
-    }
-    .box{
-        background: rgba(255,255,255,0.15);
-        padding:25px;
-        border-radius:20px;
-        width:320px;
-        box-shadow:0 10px 30px rgba(0,0,0,0.2);
-    }
-    input{
-        padding:10px;
-        border-radius:10px;
-        border:none;
-        outline:none;
-        width:80%;
-        margin-top:10px;
-    }
-    button{
-        margin-top:15px;
-        padding:10px 20px;
-        border:none;
-        border-radius:20px;
-        cursor:pointer;
-        background:#ff4d6d;
-        color:#fff;
-        font-weight:bold;
-    }
-    .hidden{display:none;}
-    .letter{
-        text-align:left;
-        line-height:1.6;
-        margin-top:10px;
-        font-size:14px;
-    }
-    .gift{
-        font-size:60px;
-        cursor:pointer;
-        animation: shake 1s infinite;
-        margin-top:15px;
-    }
-    @keyframes shake{
-        0%{transform:rotate(0deg);}
-        25%{transform:rotate(5deg);}
-        50%{transform:rotate(0deg);}
-        75%{transform:rotate(-5deg);}
-        100%{transform:rotate(0deg);}
-    }
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9aa2, #ffb7b2);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    text-align:center;
+}
+.box{
+    background: rgba(255,255,255,0.15);
+    padding:25px;
+    border-radius:20px;
+    width:320px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+input{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    width:80%;
+    margin-top:10px;
+}
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:#ff4d6d;
+    color:#fff;
+    font-weight:bold;
+}
+.hidden{display:none;}
+.letter{
+    text-align:left;
+    line-height:1.6;
+    margin-top:10px;
+    font-size:14px;
+}
+.gift{
+    font-size:60px;
+    cursor:pointer;
+    animation: shake 1s infinite;
+    margin-top:15px;
+}
+@keyframes shake{
+    0%{transform:rotate(0deg);}
+    25%{transform:rotate(5deg);}
+    50%{transform:rotate(0deg);}
+    75%{transform:rotate(-5deg);}
+    100%{transform:rotate(0deg);}
+}
 </style>
 </head>
 <body>
 
-<!-- MÀN NHẬP MK -->
+<!-- NHẠC GIÁNG SINH -->
+<audio id="bgMusic" src="nhac.mp3" loop></audio>
+
+<!-- NHẬP MẬT KHẨU -->
 <div class="box" id="login">
     <h2>🎄 Noel nè</h2>
-    <p>nhập mật khẩu đi rồi t cho vô</p>
+    <p>nhập mật khẩu rồi vô</p>
     <input type="password" id="pass" placeholder="mật khẩu">
     <br>
     <button onclick="check()">vô 🎅</button>
@@ -77,21 +80,19 @@
 <div class="box hidden" id="letterBox">
     <h3>📩 Thư Noel</h3>
     <div class="letter">
-        Noel rồi đó.<br>
-        Không biết dạo này m sao,<br>
-        có mệt không, có ổn không.<br><br>
-        T không hỏi nhiều,<br>
-        chỉ mong là m vẫn đang cố gắng<br>
-        theo cách của riêng m.<br><br>
-        Nếu thấy buồn thì nhớ là<br>
-        vẫn có người nghĩ tới m.
+        Noel rồi.<br>
+        Không biết dạo này m có ổn không.<br><br>
+        Nếu m đang mệt thì nghỉ chút cũng được,<br>
+        không cần phải lúc nào cũng mạnh mẽ.<br><br>
+        T chỉ muốn m biết là<br>
+        vẫn có người để ý tới m.
     </div>
     <button onclick="showGift()">xem quà 🎁</button>
 </div>
 
 <!-- QUÀ -->
 <div class="box hidden" id="giftBox">
-    <h3>🎁 Quà nè</h3>
+    <h3>🎁 Quà cho m</h3>
     <div class="gift" onclick="openGift()">🎁</div>
     <p>(bấm vô quà đi)</p>
 </div>
@@ -108,8 +109,12 @@ function check(){
     if(mk === "6789"){
         document.getElementById("login").classList.add("hidden");
         document.getElementById("letterBox").classList.remove("hidden");
+
+        const music = document.getElementById("bgMusic");
+        music.volume = 0.5;
+        music.play();
     }else{
-        alert("sai mk rồi 😶");
+        alert("sai mật khẩu rồi 😶");
     }
 }
 function showGift(){

@@ -2,128 +2,213 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Noel 🎄</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🎄 Quà Giáng Sinh 🎁</title>
+
 <style>
+*{box-sizing:border-box}
 body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9aa2, #ffb7b2);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#fff;
-    text-align:center;
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ff9acb,#ffd6e3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:"Segoe UI",sans-serif;
+  overflow:hidden;
 }
-.box{
-    background: rgba(255,255,255,0.15);
-    padding:25px;
-    border-radius:20px;
-    width:320px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+
+/* ===== LOGIN ===== */
+#login{
+  background:white;
+  padding:26px;
+  border-radius:22px;
+  text-align:center;
+  width:90%;
+  max-width:330px;
+  box-shadow:0 15px 40px rgba(255,90,150,.35);
 }
-input{
-    padding:10px;
-    border-radius:10px;
-    border:none;
-    outline:none;
-    width:80%;
-    margin-top:10px;
+#login h3{margin-bottom:16px;color:#ff4f8b}
+#login input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:2px solid #ff7aa2;
+  font-size:16px;
 }
-button{
-    margin-top:15px;
-    padding:10px 20px;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
-    background:#ff4d6d;
-    color:#fff;
-    font-weight:bold;
+#login button{
+  margin-top:16px;
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  background:#ff4f8b;
+  color:white;
+  font-size:16px;
 }
-.hidden{display:none;}
-.letter{
-    text-align:left;
-    line-height:1.6;
-    margin-top:10px;
-    font-size:14px;
+
+/* ===== MAIN ===== */
+#main{
+  display:none;
+  width:100%;
+  height:100%;
+  position:relative;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-.gift{
-    font-size:60px;
-    cursor:pointer;
-    animation: shake 1s infinite;
-    margin-top:15px;
+
+/* ===== GIFT ===== */
+#giftBtn{
+  position:absolute;
+  padding:16px 30px;
+  border-radius:40px;
+  border:none;
+  background:white;
+  color:#ff3b7a;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s ease;
+  box-shadow:0 10px 25px rgba(255,60,130,.4);
 }
-@keyframes shake{
-    0%{transform:rotate(0deg);}
-    25%{transform:rotate(5deg);}
-    50%{transform:rotate(0deg);}
-    75%{transform:rotate(-5deg);}
-    100%{transform:rotate(0deg);}
+
+/* NOEL */
+#noel{
+  position:absolute;
+  top:20%;
+  left:-120px;
+  font-size:56px;
+  display:none;
+  animation:noelRun 6s linear forwards;
+}
+@keyframes noelRun{
+  from{left:-120px}
+  to{left:110%}
+}
+
+/* LETTER */
+#letter{
+  display:none;
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  justify-content:center;
+  align-items:center;
+}
+#letterBox{
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  max-width:340px;
+  text-align:center;
+  animation:pop .4s ease;
+}
+@keyframes pop{
+  from{transform:scale(.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+#letterBox h2{color:#ff3b7a}
+#letterBox p{line-height:1.6}
+
+/* FIREWORK */
+.fire{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:gold;
+  border-radius:50%;
+  animation:boom 1s ease-out forwards;
+}
+@keyframes boom{
+  from{transform:scale(1);opacity:1}
+  to{transform:scale(6);opacity:0}
 }
 </style>
 </head>
+
 <body>
 
-<!-- NHẠC GIÁNG SINH -->
-<audio id="bgMusic" src="nhac.mp3" loop></audio>
-
-<!-- NHẬP MẬT KHẨU -->
-<div class="box" id="login">
-    <h2>🎄 Noel nè</h2>
-    <p>nhập mật khẩu rồi vô</p>
-    <input type="password" id="pass" placeholder="mật khẩu">
-    <br>
-    <button onclick="check()">vô 🎅</button>
+<div id="login">
+  <h3>🔐 Nhập mật khẩu</h3>
+  <input type="password" id="pass" placeholder="Mật khẩu">
+  <button onclick="checkPass()">VÀO</button>
 </div>
 
-<!-- THƯ NOEL -->
-<div class="box hidden" id="letterBox">
-    <h3>📩 Thư Noel</h3>
-    <div class="letter">
-        Noel rồi.<br>
-        Không biết dạo này m có ổn không.<br><br>
-        Nếu m đang mệt thì nghỉ chút cũng được,<br>
-        không cần phải lúc nào cũng mạnh mẽ.<br><br>
-        T chỉ muốn m biết là<br>
-        vẫn có người để ý tới m.
+<div id="main">
+  <button id="giftBtn">🎁 MỞ QUÀ</button>
+  <div id="noel">🧑‍🎄</div>
+
+  <div id="letter">
+    <div id="letterBox">
+      <h2>🎄 Giáng Sinh Vui Vẻ Nhé</h2>
+      <p>
+        Me Ri Chiss Mừn<br>
+        QUà của t đâu<br><br>
+        Quà của t đâu<br>
+       Quà của t đâu<br><br>
+        <b>điều j quan trọng nhắc lại 3 lần</b>
+      </p>
     </div>
-    <button onclick="showGift()">xem quà 🎁</button>
+  </div>
 </div>
 
-<!-- QUÀ -->
-<div class="box hidden" id="giftBox">
-    <h3>🎁 Quà cho m</h3>
-    <div class="gift" onclick="openGift()">🎁</div>
-    <p>(bấm vô quà đi)</p>
-</div>
-
-<!-- BÊN TRONG QUÀ -->
-<div class="box hidden" id="inside">
-    <h3>🎄</h3>
-    <p style="font-size:18px;">t thích m thật đó.</p>
-</div>
+<audio id="music" src="nhac.mp3" loop></audio>
 
 <script>
-function check(){
-    const mk = document.getElementById("pass").value;
-    if(mk === "6789"){
-        document.getElementById("login").classList.add("hidden");
-        document.getElementById("letterBox").classList.remove("hidden");
+const PASSWORD = "22082012Hoai";
+let count = 0;
 
-        const music = document.getElementById("bgMusic");
-        music.volume = 0.5;
-        music.play();
-    }else{
-        alert("sai mật khẩu rồi 😶");
-    }
+const gift = document.getElementById("giftBtn");
+const music = document.getElementById("music");
+const noel = document.getElementById("noel");
+const letter = document.getElementById("letter");
+
+function checkPass(){
+  if(pass.value === PASSWORD){
+    login.style.display="none";
+    main.style.display="block";
+    moveGift();
+  }else alert("Sai mật khẩu rồi 😛");
 }
-function showGift(){
-    document.getElementById("letterBox").classList.add("hidden");
-    document.getElementById("giftBox").classList.remove("hidden");
+
+function moveGift(){
+  const maxX = window.innerWidth - gift.offsetWidth - 20;
+  const maxY = window.innerHeight - gift.offsetHeight - 40;
+  gift.style.left = Math.random()*maxX + "px";
+  gift.style.top = Math.random()*maxY + "px";
 }
-function openGift(){
-    document.getElementById("giftBox").classList.add("hidden");
-    document.getElementById("inside").classList.remove("hidden");
+
+gift.addEventListener("click",()=>{
+  count++;
+
+  // đảm bảo nhạc chạy trên iOS
+  music.play().catch(()=>{});
+
+  moveGift();
+  gift.style.transform = `scale(${Math.max(.45,1-count*.07)})`;
+
+  if(count===3 || count===6){
+    noel.style.display="block";
+    noel.style.animation="none";
+    void noel.offsetWidth;
+    noel.style.animation="noelRun 6s linear forwards";
+  }
+
+  if(count>=10){
+    gift.style.display="none";
+    fireworks();
+    setTimeout(()=>letter.style.display="flex",900);
+  }
+});
+
+function fireworks(){
+  for(let i=0;i<45;i++){
+    const f=document.createElement("div");
+    f.className="fire";
+    f.style.left=Math.random()*innerWidth+"px";
+    f.style.top=Math.random()*innerHeight+"px";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
 }
 </script>
 
